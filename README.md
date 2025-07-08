@@ -40,13 +40,16 @@ A comprehensive NLP pipeline designed for performing Named Entity Recognition (N
    cd persian-ner-pipeline
 
 2. Create and activate a new conda environment with Python 3.10:
+   ```bash
    conda create -n persian_ner python=3.10 -y
    conda activate persian_ner
 
 3. Install required Python packages using pip inside the activated environment:
+   ```bash
    pip install pandas beautifulsoup4 hazm stanza
 
 4. Download the Stanza Persian model (if not already installed):
+   ```python
    import stanza
    stanza.download('fa')
 
