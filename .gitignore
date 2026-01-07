@@ -1,0 +1,29 @@
+# data & outputs
+data/*.csv
+data/*.tsv
+data/*.json
+data/*.parquet
+output/
+artifacts/*.rar
+artifacts/*.zip
+*.xlsx
+*.parquet
+*.csv
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+.env
+.ipynb_checkpoints/
+
+# logs
+*.log
+progress.txt
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software or the released silver-standard entity inventories, please cite it as below."
+title: "Persian NER Pipeline for Wikipedia-based Entity Extraction"
+type: software
+authors:
+  - family-names: Radnia
+    given-names: Amir
+    orcid: "https://orcid.org/0009-0004-2141-9692"
+repository-code: "https://github.com/amirradnia99/persian-ner-pipeline"
+url: "https://github.com/amirradnia99/persian-ner-pipeline"
+license: MIT
+keywords:
+  - Persian
+  - Farsi
+  - named entity recognition
+  - NER
+  - Wikipedia
+  - Stanza
+  - Hazm
+  - silver-standard
+version: "v1.0.0-silver"
+date-released: "2026-01-07"

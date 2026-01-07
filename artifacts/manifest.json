@@ -1,0 +1,50 @@
+{
+  "artifact_name": "PW-NER",
+  "release_tag": "v1.0.0-silver",
+  "artifact_type": "silver-standard named entity inventories",
+  "source_corpus": {
+    "name": "Farsi Wikipedia (Kaggle)",
+    "url": "https://www.kaggle.com/datasets/amirpourmand/fa-wikipedia",
+    "license": "CC0",
+    "snapshot_date": "1400/04/25",
+    "notes": "Snapshot used to generate the released inventories; corpus itself is not redistributed."
+  },
+  "pipeline": {
+    "repo": "https://github.com/amirradnia99/persian-ner-pipeline",
+    "script": "pipeline.py",
+    "ner_engine": "stanza (fa)",
+    "preprocess": [
+      "BeautifulSoup HTML stripping",
+      "Hazm normalization",
+      "Whitespace normalization"
+    ],
+    "ner_input": "normalized natural text (no tokenization or stopword removal)",
+    "hardware": "CPU-only",
+    "determinism_notes": "Fixed preprocessing steps; Stanza inference executed without GPU acceleration."
+  },
+  "entity_classes": [
+    "PER",
+    "LOC",
+    "ORG",
+    "FAC",
+    "PRO",
+    "EVENT"
+  ],
+  "counts": {
+    "PER": 765974,
+    "LOC": 294747,
+    "ORG": 211018,
+    "FAC": 97162,
+    "PRO": 41088,
+    "EVENT": 39595
+  },
+  "integrity": {
+    "artifact": "PW-NER.rar",
+    "checksum_file": "checksums_sha256.txt",
+    "checksum_algorithm": "SHA-256"
+  },
+  "citation": {
+    "repository": "https://github.com/amirradnia99/persian-ner-pipeline",
+    "citation_file": "CITATION.cff"
+  }
+}
