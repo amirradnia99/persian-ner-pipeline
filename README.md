@@ -1,197 +1,146 @@
-# Persian NER Pipeline (Wikipedia-based)
+# Persian NER Pipeline (PW-NER)
+
+A **research-grade Persian (Farsi) Named Entity Recognition (NER) pipeline** for large-scale extraction of
+**silver-standard entity inventories** from Persian Wikipedia.  
+This repository accompanies a survey/resource-style manuscript and provides the **exact code, metadata,
+and integrity checks** required for reproducibility.
+
+---
 
 ## Overview
-This repository provides a **reproducible research pipeline** for large-scale **Named Entity Recognition (NER)** on Persian (Farsi) text, with a specific focus on **Wikipedia-based corpora**.
 
-The pipeline was developed to support **survey and resource-oriented research** by producing **silver-standard entity inventories** that can be used for lexicon construction, weak supervision, coverage analysis, and downstream NLP research.
+This project provides:
 
-This repository accompanies a **Q1 journal survey paper** and follows **research software and reproducibility standards** expected by top-tier venues.
+- A clean, reproducible **NER pipeline** based on **Hazm normalization + Stanza NER**
+- **Silver-standard named entity inventories** extracted from Persian Wikipedia
+- Full **data provenance**, **checksum-based integrity verification**, and **citation metadata**
+- A repository layout suitable for **Q1 journal artifact evaluation**
+
+The pipeline is designed for **resource construction and analysis**, not supervised model training.
 
 ---
 
-## Data Source
+## Entity Types
 
-### Primary Corpus
-- **Dataset**: *Farsi Wikipedia*  
-- **Author**: Amir Pourmand  
-- **Platform**: Kaggle  
-- **Year**: 2022  
-- **License**: CC0 (Public Domain)  
-- **Snapshot Date**: 1400/04/25  
-- **Format**: CSV (`title`, `content`, `link`)  
-- **Size**: ~4.91 GB  
+The released inventories include the following entity classes (as produced by Stanza for Persian):
 
-Dataset link:  
+- **PER** – Person  
+- **LOC** – Location  
+- **ORG** – Organization  
+- **FAC** – Facility  
+- **PRO** – Product  
+- **EVENT** – Event  
+
+Entities are stored as **JSON objects** with text spans and character offsets (relative to normalized text).
+
+---
+
+## Dataset
+
+### Source Corpus
+
+- **Name:** Farsi Wikipedia  
+- **Provider:** Amir Pourmand  
+- **Platform:** Kaggle  
+- **License:** CC0 (Public Domain)  
+- **Snapshot date:** 1400/04/25  
+
+The raw corpus is **not redistributed** due to size constraints.
+
+To obtain the dataset:
+
 https://www.kaggle.com/datasets/amirpourmand/fa-wikipedia
 
-The raw Wikipedia corpus **is not redistributed** in this repository due to size and licensing best practices. Users must download it directly from Kaggle.
+Expected input path after download:
+
+```
+data/raw_data.csv
+```
+
+See `data/README.md` for details.
 
 ---
 
-## Methodology
+## Preprocessing and NER Pipeline
 
-### Preprocessing
-The pipeline applies a Persian-specific preprocessing workflow:
+The released inventories were generated using the following steps:
+
 - HTML tag removal (BeautifulSoup)
-- Noise filtering and normalization
 - Persian text normalization (Hazm)
-- Tokenization and stopword removal (Hazm)
+- Whitespace normalization
+- Named Entity Recognition using **Stanza (fa)**
 
-### Named Entity Recognition
-- **NER Engine**: Stanza (Persian pretrained model)
-- **Entity Types Extracted**:
-  - PER (Person)
-  - LOC (Location)
-  - ORG (Organization)
-  - FAC (Facility)
-  - PRO (Product)
-  - EVENT (Event)
+**Important notes:**
 
-NER is applied in **batch mode** with:
-- Configurable batch size
-- Logging and progress tracking
-- Power-failure recovery via resume checkpoints
+- NER is performed on **normalized natural text**
+- No tokenization or stopword removal is applied prior to NER
+- Character offsets refer to positions in the **normalized text**, not raw Wikipedia markup
+- Inference is executed **CPU-only** for consistency
 
-### Output Artifacts
-The pipeline produces **silver-standard entity inventories**, automatically extracted from the corpus:
-- `per_entities`
-- `loc_entities`
-- `org_entities`
-- `fac_entities`
-- `pro_entities`
-- `event_entities`
+The full implementation is available in:
 
-These artifacts are intended for **research and analysis**, not as gold-standard annotations.
+```
+pipeline.py
+```
 
 ---
 
-## Generated Resources
+## Artifact Access
 
-The following entity inventories were extracted from the Wikipedia snapshot:
+The **silver-standard Persian NER inventories** are released via GitHub Releases.
 
-| Entity Type | Approx. Unique Entries |
-|------------|------------------------|
-| PER        | 765,974 |
-| LOC        | 294,747 |
-| ORG        | 211,018 |
-| FAC        | 97,162 |
-| PRO        | 41,088 |
-| EVENT     | 39,595 |
+### Latest release (recommended)
 
-Due to size constraints, full artifacts are **not committed directly to GitHub**.
+https://github.com/amirradnia99/persian-ner-pipeline/releases/tag/v1.0.1-silver
 
-### Artifact Access
-- Full entity inventories are distributed via **GitHub Releases**
-- Each release includes:
-  - Entity files (CSV / Parquet)
-  - SHA-256 checksums
-  - Extraction metadata (pipeline version, corpus snapshot)
+Each release includes:
 
-See `artifacts/README.md` for links and integrity verification.
+- Compressed entity inventories (e.g., `PW-NER.rar`)
+- `checksums_sha256.txt` for integrity verification
+- `manifest.json` describing:
+  - Corpus snapshot
+  - Pipeline configuration
+  - Entity classes and counts
 
----
-
-## Repository Structure
-
-```
-persian-ner-pipeline/
-│
-├── pipeline.py            # Main NER pipeline script
-├── artifacts/             # Artifact metadata + integrity files
-│   ├── README.md
-│   ├── manifest.json
-│   └── checksums_sha256.txt
-├── data/
-│   └── README.md          # Instructions for obtaining the Kaggle dataset
-├── README.md              # This file
-├── LICENSE
-├── .gitignore
-└── .gitattributes
-```
-
-Generated outputs (e.g., CSV results, logs) are written to a local `output/` directory,
-which is intentionally **gitignored** and not part of the repository.
+See `artifacts/README.md` for verification instructions.
 
 ---
 
 ## Reproducibility
 
-To ensure reproducibility:
-- All experiments are tied to a **fixed Wikipedia snapshot**
-- Pipeline versions are tracked via **Git commit hashes**
-- Dependency versions are explicitly documented
-- Artifact checksums are provided for verification
+This repository provides:
 
-This repository follows **research software best practices** expected by Q1 journals.
+- Exact pipeline implementation used for extraction
+- Explicit corpus source and snapshot date
+- SHA-256 checksums for released artifacts
+- Machine-readable citation metadata (`CITATION.cff`)
 
----
-
-## Installation
-
-```bash
-conda create -n persian_ner python=3.10 -y
-conda activate persian_ner
-pip install pandas beautifulsoup4 hazm stanza
-```
-
-Download the Persian Stanza model:
-```python
-import stanza
-stanza.download("fa")
-```
-
----
-
-## Usage
-
-```bash
-python pipeline.py
-```
-
-The script expects the Wikipedia CSV file to be available at:
-```
-data/raw_data.csv
-```
-
----
-
-## Limitations
-
-- The extracted entities are **automatically generated** and may contain noise.
-- No manual annotation or gold-standard evaluation is provided.
-- Wikipedia text includes ambiguity and inconsistencies.
-
-Users are encouraged to apply **manual validation or downstream filtering** when using these resources.
+The pipeline supports **fault-tolerant execution** with progress tracking for long runs.
 
 ---
 
 ## Citation
 
-If you use this pipeline or the derived resources, please cite:
+If you use this code or the released entity inventories, please cite the repository.
+Citation metadata is provided in:
 
 ```
-@misc{persian_ner_pipeline_2026,
-  title        = {Persian NER Pipeline for Wikipedia-based Entity Extraction},
-  author       = {Amir Radnia},
-  year         = {2026},
-  howpublished = {GitHub repository},
-  url          = {https://github.com/amirradnia99/persian-ner-pipeline}
-}
+CITATION.cff
 ```
 
-And the original dataset:
-
-```
-@misc{amir_pourmand_2022,
-  title        = {Farsi Wikipedia},
-  author       = {Pourmand, Amir},
-  year         = {2022},
-  publisher    = {Kaggle},
-  doi          = {10.34740/KAGGLE/DSV/3949764}
-}
-```
+GitHub automatically exposes citation formats via the **“Cite this repository”** feature.
 
 ---
 
 ## License
-MIT License © Amir Radnia
+
+- **Code:** MIT License  
+- **Source corpus:** CC0 (via Kaggle)  
+- **Derived inventories:** Released as silver-standard research resources
+
+---
+
+## Disclaimer
+
+The released entities are **automatically extracted** and may contain noise or labeling errors.
+They are intended for **analysis, benchmarking, and survey research**, not as gold-standard annotations.
