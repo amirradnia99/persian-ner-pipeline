@@ -5,6 +5,8 @@ A research-grade Persian (Farsi) Named Entity Recognition (NER) pipeline and dat
 
 This repository is designed as a **Q1 journal-facing research artifact**: deterministic CLI tools, pinned dependencies, integrity metadata (manifests + SHA-256), and citation support.
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18365951.svg)](https://doi.org/10.5281/zenodo.18365951)
+
 ---
 
 ## What this repo is (and isn’t)
@@ -120,7 +122,6 @@ Use GitHub’s “Cite this repository” button or the metadata in:
 - `CITATION.cff`
 
 ### **DOI:**
-
 The dataset and associated software artifacts are archived on Zenodo:
 
 - **Concept DOI**: [https://doi.org/10.5281/zenodo.18365950](https://doi.org/10.5281/zenodo.18365950)  
