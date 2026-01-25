@@ -1,0 +1,18 @@
+# Core runtime dependencies (PINNED for reproducibility)
+# Python: >=3.10,<3.13 (documented; enforce via pyproject/conda if desired)
+
+stanza==1.8.2
+hazm==0.9.1
+beautifulsoup4==4.12.3
+lxml==5.1.0
+
+# Data handling
+pandas==2.2.1
+numpy==1.26.4
+openpyxl==3.1.2
+
+# Progress / utilities
+tqdm==4.66.2
+
+# Optional but recommended (logging, robustness)
+python-dateutil==2.9.0.post0

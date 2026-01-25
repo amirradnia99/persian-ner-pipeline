@@ -1,5 +1,7 @@
 cff-version: 1.2.0
-message: "If you use this software or the released silver-standard entity inventories, please cite it as below."
+message: >-
+  If you use this software and/or the released PW-NER silver-standard entity inventories,
+  please cite the software citation below and (when applicable) the dataset reference.
 title: "Persian NER Pipeline for Wikipedia-based Entity Extraction"
 type: software
 authors:
@@ -20,3 +22,33 @@ keywords:
   - silver-standard
 version: "v1.0.0-silver"
 date-released: "2026-01-07"
+concept-doi: https://doi.org/10.5281/zenodo.18365950
+version-doi: https://doi.org/10.5281/zenodo.18365951
+
+preferred-citation:
+  type: software
+  title: "Persian NER Pipeline for Wikipedia-based Entity Extraction"
+  authors:
+    - family-names: Radnia
+      given-names: Amir
+      orcid: "https://orcid.org/0009-0004-2141-9692"
+  version: "v1.0.0-silver"
+  date-released: "2026-01-07"
+  year: 2026
+  repository-code: "https://github.com/amirradnia99/persian-ner-pipeline"
+  url: "https://github.com/amirradnia99/persian-ner-pipeline"
+  concept-doi: https://doi.org/10.5281/zenodo.18365950
+  version-doi: https://doi.org/10.5281/zenodo.18365951
+
+references:
+  - type: dataset
+    title: "PW-NER: Silver-Standard Persian Wikipedia Named Entity Inventories"
+    authors:
+      - family-names: Radnia
+        given-names: Amir
+        orcid: "https://orcid.org/0009-0004-2141-9692"
+    version: "v1.0.0-silver"
+    year: 2026
+    concept-doi: https://doi.org/10.5281/zenodo.18365950
+    version-doi: https://doi.org/10.5281/zenodo.18365951
+    url: "https://github.com/amirradnia99/persian-ner-pipeline"

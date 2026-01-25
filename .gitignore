@@ -1,29 +1,50 @@
-# data & outputs
-data/*.csv
-data/*.tsv
-data/*.json
-data/*.parquet
-output/
-artifacts/*.rar
-artifacts/*.zip
-*.xlsx
-*.parquet
-*.csv
-
-# python
+# -------------------------------------------------
+# Python
+# -------------------------------------------------
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
 *.pyd
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+
+# -------------------------------------------------
+# Virtual environments
+# -------------------------------------------------
 .venv/
 venv/
-.env
-.ipynb_checkpoints/
+ENV/
 
-# logs
-*.log
-progress.txt
-
-# OS
+# -------------------------------------------------
+# IDE / OS
+# -------------------------------------------------
+.vscode/
+.idea/
 .DS_Store
 Thumbs.db
+
+# -------------------------------------------------
+# Runtime outputs (DO NOT TRACK)
+# -------------------------------------------------
+outputs/
+
+# -------------------------------------------------
+# Large / raw data (project-specific)
+# -------------------------------------------------
+data/raw_data.csv
+
+# -------------------------------------------------
+# Release artifacts (generated archives)
+# -------------------------------------------------
+*.zip
+*.rar
+*.7z
+
+# -------------------------------------------------
+# Logs & temp files
+# -------------------------------------------------
+*.log
+*.tmp

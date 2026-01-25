@@ -1,146 +1,144 @@
+
 # Persian NER Pipeline (PW-NER)
 
-A **research-grade Persian (Farsi) Named Entity Recognition (NER) pipeline** for large-scale extraction of
-**silver-standard entity inventories** from Persian Wikipedia.  
-This repository accompanies a survey/resource-style manuscript and provides the **exact code, metadata,
-and integrity checks** required for reproducibility.
+A research-grade Persian (Farsi) Named Entity Recognition (NER) pipeline and dataset for large-scale extraction of **silver-standard named entity inventories** from Persian Wikipedia.
+
+This repository is designed as a **Q1 journal-facing research artifact**: deterministic CLI tools, pinned dependencies, integrity metadata (manifests + SHA-256), and citation support.
 
 ---
 
-## Overview
+## What this repo is (and isn’t)
 
-This project provides:
+### It **is**
+- A reproducible extraction pipeline (`pipeline.py`)
+- A deterministic QC stage (`qc.py`)
+- Release metadata & integrity artifacts (`artifacts/`)
+- Documentation for dataset, QC, and full reproduction (`docs/`)
+- A citable research artifact (`CITATION.cff`)
 
-- A clean, reproducible **NER pipeline** based on **Hazm normalization + Stanza NER**
-- **Silver-standard named entity inventories** extracted from Persian Wikipedia
-- Full **data provenance**, **checksum-based integrity verification**, and **citation metadata**
-- A repository layout suitable for **Q1 journal artifact evaluation**
-
-The pipeline is designed for **resource construction and analysis**, not supervised model training.
-
----
-
-## Entity Types
-
-The released inventories include the following entity classes (as produced by Stanza for Persian):
-
-- **PER** – Person  
-- **LOC** – Location  
-- **ORG** – Organization  
-- **FAC** – Facility  
-- **PRO** – Product  
-- **EVENT** – Event  
-
-Entities are stored as **JSON objects** with text spans and character offsets (relative to normalized text).
+### It **is not**
+- A hosted copy of the raw Persian Wikipedia corpus (too large; obtained externally)
+- A gold-standard labeled NER dataset (outputs are **silver-standard**)
 
 ---
 
-## Dataset
+## Quickstart
 
-### Source Corpus
+### 1) Install
+```bash
+pip install -r requirements.txt
+```
 
-- **Name:** Farsi Wikipedia  
-- **Provider:** Amir Pourmand  
-- **Platform:** Kaggle  
-- **License:** CC0 (Public Domain)  
-- **Snapshot date:** 1400/04/25  
-
-The raw corpus is **not redistributed** due to size constraints.
-
-To obtain the dataset:
-
-https://www.kaggle.com/datasets/amirpourmand/fa-wikipedia
-
-Expected input path after download:
-
+### 2) Provide the corpus
+Download the referenced Persian Wikipedia snapshot and place it as:
 ```
 data/raw_data.csv
 ```
+See `data/README.md` for the exact input contract (columns, encoding, snapshot date).
 
-See `data/README.md` for details.
-
----
-
-## Preprocessing and NER Pipeline
-
-The released inventories were generated using the following steps:
-
-- HTML tag removal (BeautifulSoup)
-- Persian text normalization (Hazm)
-- Whitespace normalization
-- Named Entity Recognition using **Stanza (fa)**
-
-**Important notes:**
-
-- NER is performed on **normalized natural text**
-- No tokenization or stopword removal is applied prior to NER
-- Character offsets refer to positions in the **normalized text**, not raw Wikipedia markup
-- Inference is executed **CPU-only** for consistency
-
-The full implementation is available in:
-
+### 3) Run extraction + export inventories (end-to-end)
+```bash
+python pipeline.py   --input data/raw_data.csv   --output_dir PW-NER   --chunksize 5000   --batch_size 250   --text_field both   --export_inventories   --inventories_format xlsx
 ```
-pipeline.py
+
+For deterministic manifests (no timestamps):
+```bash
+python pipeline.py ... --no_timestamp
+```
+
+Outputs are written under `PW-NER/`. Directory contract: `outputs/README.md`.
+
+### 4) Run QC (optional, recommended)
+```bash
+python qc.py   --input_dir PW-NER/inventories   --output_dir PW-NER/qc   --write_raw_copy
+```
+
+For deterministic QC reports:
+```bash
+python qc.py ... --no_timestamp
 ```
 
 ---
 
-## Artifact Access
+## Entity types
 
-The **silver-standard Persian NER inventories** are released via GitHub Releases.
+Entities are produced using **Stanza (fa)** and grouped into six classes:
 
-### Latest release (recommended)
+- **PER** — Person
+- **LOC** — Location
+- **ORG** — Organization
+- **FAC** — Facility
+- **PRO** — Product
+- **EVENT** — Event
 
-https://github.com/amirradnia99/persian-ner-pipeline/releases/tag/v1.0.1-silver
-
-Each release includes:
-
-- Compressed entity inventories (e.g., `PW-NER.rar`)
-- `checksums_sha256.txt` for integrity verification
-- `manifest.json` describing:
-  - Corpus snapshot
-  - Pipeline configuration
-  - Entity classes and counts
-
-See `artifacts/README.md` for verification instructions.
+All released entities are automatically extracted (silver-standard).
 
 ---
 
-## Reproducibility
+## Repository structure
 
-This repository provides:
+```
+persian-ner-pipeline/
+├── pipeline.py
+├── qc.py
+├── requirements.txt
+├── requirements-dev.txt            # optional
+├── scripts/
+│   └── make_checksums.py
+├── artifacts/
+│   ├── manifest.json
+│   ├── checksums_sha256.txt
+│   └── README.md
+├── data/
+│   └── README.md                   # input corpus contract
+├── docs/
+│   ├── REPRODUCIBILITY.md
+│   ├── DATASET.md
+│   ├── QC.md
+│   └── CHANGELOG.md
+└── outputs/
+    └── README.md                   # runtime output layout (not tracked)
+```
 
-- Exact pipeline implementation used for extraction
-- Explicit corpus source and snapshot date
-- SHA-256 checksums for released artifacts
-- Machine-readable citation metadata (`CITATION.cff`)
+---
 
-The pipeline supports **fault-tolerant execution** with progress tracking for long runs.
+## Dataset access (releases + Zenodo)
+
+The PW-NER inventories are distributed via:
+- GitHub Releases
+- Zenodo (DOI-backed archival)
+
+Integrity verification:
+- `artifacts/checksums_sha256.txt`
+- `scripts/make_checksums.py`
 
 ---
 
 ## Citation
 
-If you use this code or the released entity inventories, please cite the repository.
-Citation metadata is provided in:
+Use GitHub’s “Cite this repository” button or the metadata in:
+- `CITATION.cff`
 
-```
-CITATION.cff
-```
+### **DOI:**
 
-GitHub automatically exposes citation formats via the **“Cite this repository”** feature.
+The dataset and associated software artifacts are archived on Zenodo:
+
+- **Concept DOI**: [https://doi.org/10.5281/zenodo.18365950](https://doi.org/10.5281/zenodo.18365950)  
+  *This DOI represents the entire dataset collection and will always resolve to the latest version.*
+
+- **Version DOI**: [https://doi.org/10.5281/zenodo.18365951](https://doi.org/10.5281/zenodo.18365951)  
+  *This DOI corresponds to the specific release of this version (v1.0.0).*
 
 ---
 
 ## License
 
-- **Code:** MIT License  
-- **Source corpus:** CC0 (via Kaggle)  
-- **Derived inventories:** Released as silver-standard research resources
+- **Code**: MIT (see `LICENSE`)
+- **Source corpus**: CC0 (external, via Kaggle)
+- **Derived inventories**: silver-standard research artifact (see Zenodo record for the release)
 
 ---
 
 ## Disclaimer
 
-The released entities are **automatically extracted** and may contain noise or labeling errors.
-They are intended for **analysis, benchmarking, and survey research**, not as gold-standard annotations.
+Automatically generated outputs may contain noise and boundary errors. This is intended for large-scale analysis, benchmarking, KG construction, and resource/survey research — not as a gold-standard annotation dataset.

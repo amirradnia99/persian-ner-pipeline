@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-smoke-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Compile all (syntax check)
+        run: |
+          python -m compileall .
+
+      - name: Deterministic smoke test (no model download)
+        run: |
+          python - << 'PY'
+          from pipeline import strip_html, build_normalizer, normalize_fa
+
+          # 1) HTML stripping should be deterministic
+          assert strip_html("<p>سلام <b>دنیا</b></p>") == "سلام دنیا"
+
+          # 2) Normalization should at least deterministically collapse whitespace
+          normalizer, cfg = build_normalizer()
+          assert isinstance(cfg, dict) and len(cfg) > 0
+
+          assert normalize_fa("  سلام   دنیا  ", normalizer) == "سلام دنیا"
+          assert normalize_fa("\\nسلام\\tدنیا\\r", normalizer) == "سلام دنیا"
+
+          print("Deterministic smoke tests passed.")
+          PY
+
+      - name: Smoke test: CLI help (must succeed)
+        run: |
+          python pipeline.py --help

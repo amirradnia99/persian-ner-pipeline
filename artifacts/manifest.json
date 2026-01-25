@@ -1,26 +1,17 @@
 {
   "artifact_name": "PW-NER",
-  "release_tag": "v1.0.0-silver",
   "artifact_type": "silver-standard named entity inventories",
-  "source_corpus": {
-    "name": "Farsi Wikipedia (Kaggle)",
-    "url": "https://www.kaggle.com/datasets/amirpourmand/fa-wikipedia",
-    "license": "CC0",
-    "snapshot_date": "1400/04/25",
-    "notes": "Snapshot used to generate the released inventories; corpus itself is not redistributed."
+  "citation": {
+    "citation_file": "CITATION.cff",
+    "repository": "https://github.com/amirradnia99/persian-ner-pipeline"
   },
-  "pipeline": {
-    "repo": "https://github.com/amirradnia99/persian-ner-pipeline",
-    "script": "pipeline.py",
-    "ner_engine": "stanza (fa)",
-    "preprocess": [
-      "BeautifulSoup HTML stripping",
-      "Hazm normalization",
-      "Whitespace normalization"
-    ],
-    "ner_input": "normalized natural text (no tokenization or stopword removal)",
-    "hardware": "CPU-only",
-    "determinism_notes": "Fixed preprocessing steps; Stanza inference executed without GPU acceleration."
+  "counts": {
+    "EVENT": 39595,
+    "FAC": 97162,
+    "LOC": 294747,
+    "ORG": 211018,
+    "PER": 765974,
+    "PRO": 41088
   },
   "entity_classes": [
     "PER",
@@ -30,21 +21,35 @@
     "PRO",
     "EVENT"
   ],
-  "counts": {
-    "PER": 765974,
-    "LOC": 294747,
-    "ORG": 211018,
-    "FAC": 97162,
-    "PRO": 41088,
-    "EVENT": 39595
-  },
   "integrity": {
     "artifact": "PW-NER.rar",
+    "checksum_algorithm": "SHA-256",
     "checksum_file": "checksums_sha256.txt",
-    "checksum_algorithm": "SHA-256"
+    "checksum_generation": {
+      "algorithm": "SHA-256",
+      "determinism": "Files are hashed in sorted relative-path order; output excludes the checksum file itself.",
+      "script": "scripts/make_checksums.py"
+    }
   },
-  "citation": {
-    "repository": "https://github.com/amirradnia99/persian-ner-pipeline",
-    "citation_file": "CITATION.cff"
+  "pipeline": {
+    "determinism_notes": "Fixed preprocessing steps; Stanza inference executed without GPU acceleration.",
+    "hardware": "CPU-only",
+    "ner_engine": "stanza (fa)",
+    "ner_input": "normalized natural text (no tokenization or stopword removal)",
+    "preprocess": [
+      "BeautifulSoup HTML stripping",
+      "Hazm normalization",
+      "Whitespace normalization"
+    ],
+    "repo": "https://github.com/amirradnia99/persian-ner-pipeline",
+    "script": "pipeline.py"
+  },
+  "release_tag": "v1.0.0-silver",
+  "source_corpus": {
+    "license": "CC0",
+    "name": "Farsi Wikipedia (Kaggle)",
+    "notes": "Snapshot used to generate the released inventories; corpus itself is not redistributed.",
+    "snapshot_date": "1400/04/25",
+    "url": "https://www.kaggle.com/datasets/amirpourmand/fa-wikipedia"
   }
 }
