@@ -188,7 +188,7 @@ Outputs:
   year = {2026},
   publisher = {Zenodo},
   version = {v1.0.0-silver},
-  doi = {10.5281/zenodo.18365950},
+  doi = {10.5281/zenodo.18365951},
   url = {https://github.com/amirradnia99/persian-ner-pipeline}
 }
 ```
@@ -205,4 +205,4 @@ Repository:
 https://github.com/amirradnia99/persian-ner-pipeline
 
 DOI:
-https://doi.org/10.5281/zenodo.18365950
+https://doi.org/10.5281/zenodo.18365951

@@ -1,16 +1,23 @@
 cff-version: 1.2.0
+
 message: >-
-  If you use this software and/or the released PW-NER silver-standard entity inventories,
-  please cite the software citation below and (when applicable) the dataset reference.
-title: "Persian NER Pipeline for Wikipedia-based Entity Extraction"
+  If you use this software, please cite the software citation below.
+
+title: "PW-NER: Persian Wikipedia Named Entity Extraction Pipeline"
+
 type: software
+
 authors:
   - family-names: Radnia
     given-names: Amir
     orcid: "https://orcid.org/0009-0004-2141-9692"
+
 repository-code: "https://github.com/amirradnia99/persian-ner-pipeline"
+
 url: "https://github.com/amirradnia99/persian-ner-pipeline"
+
 license: MIT
+
 keywords:
   - Persian
   - Farsi
@@ -20,35 +27,28 @@ keywords:
   - Stanza
   - Hazm
   - silver-standard
-version: "v1.0.0-silver"
-date-released: "2026-01-07"
-concept-doi: https://doi.org/10.5281/zenodo.18365950
-version-doi: https://doi.org/10.5281/zenodo.18365951
+
+version: "v1.0.0"
+
+date-released: "2026-01-25"
+
+concept-doi: "https://doi.org/10.5281/zenodo.18365950"
+
+version-doi: "https://doi.org/10.5281/zenodo.18365951"
 
 preferred-citation:
   type: software
-  title: "Persian NER Pipeline for Wikipedia-based Entity Extraction"
+  title: "PW-NER: Persian Wikipedia Named Entity Extraction Pipeline"
+
   authors:
     - family-names: Radnia
       given-names: Amir
       orcid: "https://orcid.org/0009-0004-2141-9692"
-  version: "v1.0.0-silver"
-  date-released: "2026-01-07"
-  year: 2026
-  repository-code: "https://github.com/amirradnia99/persian-ner-pipeline"
-  url: "https://github.com/amirradnia99/persian-ner-pipeline"
-  concept-doi: https://doi.org/10.5281/zenodo.18365950
-  version-doi: https://doi.org/10.5281/zenodo.18365951
 
-references:
-  - type: dataset
-    title: "PW-NER: Silver-Standard Persian Wikipedia Named Entity Inventories"
-    authors:
-      - family-names: Radnia
-        given-names: Amir
-        orcid: "https://orcid.org/0009-0004-2141-9692"
-    version: "v1.0.0-silver"
-    year: 2026
-    concept-doi: https://doi.org/10.5281/zenodo.18365950
-    version-doi: https://doi.org/10.5281/zenodo.18365951
-    url: "https://github.com/amirradnia99/persian-ner-pipeline"
+  version: "v1.0.0"
+
+  year: 2026
+
+  doi: "https://doi.org/10.5281/zenodo.18365951"
+
+  repository-code: "https://github.com/amirradnia99/persian-ner-pipeline"
