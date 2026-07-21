@@ -240,3 +240,4 @@ This work was supported by the Iran University of Science and Technology (IUST),
 
 **Repository:** https://github.com/amirradnia99/persian-ner-pipeline  
 **DOI:** https://doi.org/10.5281/zenodo.18365950
+
