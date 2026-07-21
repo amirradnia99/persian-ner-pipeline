@@ -48,3 +48,6 @@ data/raw_data.csv
 # -------------------------------------------------
 *.log
 *.tmp
+
+# Verification script
+verify_repo.ps1
