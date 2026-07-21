@@ -1,47 +1,46 @@
 ﻿cff-version: 1.2.0
-message: If you use this software, please cite the software citation below.
+message: "If you use this software, please cite the software citation below."
 title: "PW-NER: Persian Wikipedia Named Entity Extraction Pipeline"
 type: software
 authors:
-  - family-names: Radnia
-    given-names: Amir
+  - family-names: "Radnia"
+    given-names: "Amir"
     orcid: "https://orcid.org/0009-0004-2141-9692"
-  - family-names: Keshvari
-    given-names: Saman
+  - family-names: "Keshvari"
+    given-names: "Saman"
     orcid: "https://orcid.org/0000-0002-6025-4999"
-  - family-names: Naderi
-    given-names: Hassan
+  - family-names: "Naderi"
+    given-names: "Hassan"
     orcid: "https://orcid.org/0000-0002-3296-8505"
 repository-code: "https://github.com/amirradnia99/persian-ner-pipeline"
 url: "https://github.com/amirradnia99/persian-ner-pipeline"
-license: MIT
+license: "MIT"
 keywords:
-  - Persian
-  - Farsi
-  - named entity recognition
-  - NER
-  - Wikipedia
-  - Stanza
-  - Hazm
-  - silver-standard
+  - "Persian"
+  - "Farsi"
+  - "named entity recognition"
+  - "NER"
+  - "Wikipedia"
+  - "Stanza"
+  - "Hazm"
+  - "silver-standard"
 version: "v1.0.0-silver"
 date-released: "2026-01-25"
-
 preferred-citation:
   type: software
   title: "PW-NER: Persian Wikipedia Named Entity Extraction Pipeline"
   authors:
-    - family-names: Radnia
-      given-names: Amir
+    - family-names: "Radnia"
+      given-names: "Amir"
       orcid: "https://orcid.org/0009-0004-2141-9692"
-    - family-names: Keshvari
-      given-names: Saman
+    - family-names: "Keshvari"
+      given-names: "Saman"
       orcid: "https://orcid.org/0000-0002-6025-4999"
-    - family-names: Naderi
-      given-names: Hassan
+    - family-names: "Naderi"
+      given-names: "Hassan"
       orcid: "https://orcid.org/0000-0002-3296-8505"
   version: "v1.0.0-silver"
   year: 2026
   repository-code: "https://github.com/amirradnia99/persian-ner-pipeline"
   url: "https://github.com/amirradnia99/persian-ner-pipeline"
-  doi: "https://doi.org/10.5281/zenodo.18365951"
+  doi: "10.5281/zenodo.18365951"
