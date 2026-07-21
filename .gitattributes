@@ -1,49 +1,19 @@
-# ================================
-# Global text normalization
-# ================================
-* text=auto eol=lf
+﻿# Auto-detect text files and perform LF normalization
+* text=auto
 
-# ----------------
 # Source code
-# ----------------
-*.py        text diff=python
-*.yml       text
-*.yaml      text
-*.json      text
-*.md        text
-*.txt       text
-*.cff       text
-*.csv       text
+*.py text eol=lf
+*.md text eol=lf working-tree-encoding=UTF-8
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.txt text eol=lf
+*.cff text eol=lf
 
-# ----------------
-# Documentation / LaTeX (if added later)
-# ----------------
-*.tex       text
-*.bib       text
-
-# ----------------
-# Binary data (no diff, no CRLF conversion)
-# ----------------
-*.xlsx      binary
-*.xls       binary
-*.ods       binary
-*.rar       binary
-*.zip       binary
-*.7z        binary
-*.pdf       binary
-*.png       binary
-*.jpg       binary
-*.jpeg      binary
-*.svg       binary
-
-# ----------------
-# Model / large artifacts (future-proof)
-# ----------------
-*.pt        binary
-*.bin       binary
-*.ckpt      binary
-
-# ----------------
-# GitHub / CI metadata
-# ----------------
-.github/**  text
+# Binaries
+*.png binary
+*.jpg binary
+*.xlsx binary
+*.zip binary
+*.rar binary
+*.7z binary
