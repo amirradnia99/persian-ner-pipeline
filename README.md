@@ -4,18 +4,28 @@
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18365950.svg)](https://doi.org/10.5281/zenodo.18365950)
 
-A reproducible pipeline for constructing silver-standard named entity inventories from Persian Wikipedia.
+A reproducible pipeline for constructing silver-standard named entity inventories from Persian Wikipedia, designed to support research in Persian natural language processing.
 
 ## Overview
 
-PW-NER is a deterministic, version-controlled Persian Named Entity Recognition extraction pipeline. It processes Persian Wikipedia text and produces entity inventories for PER, LOC, ORG, FAC, PRO, and EVENT classes using Hazm normalization and Stanza NER.
+PW-NER is a deterministic, version-controlled Persian Named Entity Recognition extraction pipeline. It processes Persian Wikipedia text and produces entity inventories for six entity classes:
+
+- PER: Person
+- LOC: Location
+- ORG: Organization
+- FAC: Facility
+- PRO: Product
+- EVENT: Event
+
+The pipeline integrates Hazm normalization and Stanza NER with pinned dependencies for reproducible extraction.
 
 ## Features
 
 - Deterministic preprocessing with ZWNJ normalization
-- Pinned dependencies for reproducibility
+- Compound segmentation support
+- Pinned dependencies
 - Six entity classes
-- Quality control filtering
+- Quality control with clean/flagged splits
 - SHA-256 artifact verification
 - Versioned DOI release
 
@@ -32,11 +42,16 @@ PW-NER is a deterministic, version-controlled Persian Named Entity Recognition e
 
 ## Installation
 
+Requirements:
+- Python 3.10+
+- pip
+
 ```bash
 git clone git@github.com:amirradnia99/persian-ner-pipeline.git
 cd persian-ner-pipeline
 python -m venv venv
 source venv/bin/activate
+# Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
@@ -50,9 +65,9 @@ data/raw_data.csv
 
 Required columns:
 
-- title
-- content
-- link (optional)
+- `title`: Wikipedia article title
+- `content`: Raw article text
+- `link`: Article URL (optional)
 
 Source:
 https://www.kaggle.com/datasets/amirpourmand/fa-wikipedia
@@ -72,6 +87,12 @@ python pipeline.py \
   --inventories_format xlsx
 ```
 
+Deterministic execution:
+
+```bash
+python pipeline.py --input data/raw_data.csv --output_dir PW-NER --no_timestamp
+```
+
 ### Quality Control
 
 ```bash
@@ -84,12 +105,50 @@ python qc.py --input_dir PW-NER/inventories --output_dir PW-NER/qc --write_raw_c
 python scripts/make_checksums.py --root artifacts --out artifacts/checksums_sha256.txt --verify
 ```
 
+## Output Structure
+
+```text
+PW-NER/
+├── inventories/
+│   ├── pers.xlsx
+│   ├── loc.xlsx
+│   ├── org.xlsx
+│   ├── fac.xlsx
+│   ├── pro.xlsx
+│   └── event.xlsx
+├── qc/
+│   ├── clean/
+│   ├── flagged/
+│   └── qc_report.json
+├── processed_data.csv
+├── run_manifest.json
+└── progress.txt
+```
+
+## Repository Structure
+
+```text
+persian-ner-pipeline/
+├── pipeline.py
+├── qc.py
+├── requirements.txt
+├── requirements-dev.txt
+├── CITATION.cff
+├── LICENSE
+├── README.md
+├── artifacts/
+├── data/
+├── docs/
+└── scripts/
+    └── make_checksums.py
+```
+
 ## Reproducibility
 
 - Deterministic execution using `--no_timestamp`
-- Exact dependency versions
+- Exact dependency versions in `requirements.txt`
 - SHA-256 checksum verification
-- Zenodo DOI release
+- Versioned Zenodo DOI release
 
 ## Dependencies
 
@@ -101,6 +160,24 @@ pandas==2.2.1
 numpy==1.26.4
 openpyxl==3.1.2
 ```
+
+## Quality Control Rules
+
+QC removes noisy entities using deterministic rules:
+
+- Length and token constraints
+- Numeric-only entities
+- Enumeration artifacts
+- Template and placeholder phrases
+- Low character diversity
+- Directional LOC/FAC artifacts
+- Product/media pronoun templates
+
+Outputs:
+
+- `clean/`: validated entities
+- `flagged/`: entities requiring inspection
+- `qc_report.json`: audit statistics
 
 ## Citation
 
@@ -118,7 +195,9 @@ openpyxl==3.1.2
 
 ## License
 
-MIT License.
+- Code: MIT License
+- Source corpus: external dataset under original license
+- Derived inventories: Silver-standard research artifact
 
 ## Contact
 
