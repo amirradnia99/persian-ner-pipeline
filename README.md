@@ -1,5 +1,9 @@
-# PW-NER: Persian Wikipedia Named Entity Extraction Pipeline
+﻿# PW-NER: Persian Wikipedia Named Entity Extraction Pipeline
 
+
+[![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.18365950-blue)](https://doi.org/10.5281/zenodo.18365950)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 A reproducible pipeline for constructing silver-standard named entity inventories from Persian Wikipedia, designed to support research in Persian natural language processing.
 
 ## Overview
@@ -124,46 +128,46 @@ python scripts/make_checksums.py \
 
 ```
 PW-NER/
-├── inventories/
-│   ├── pers.xlsx        # Person entities
-│   ├── loc.xlsx         # Location entities
-│   ├── org.xlsx         # Organization entities
-│   ├── fac.xlsx         # Facility entities
-│   ├── pro.xlsx         # Product entities
-│   └── event.xlsx       # Event entities
-├── qc/
-│   ├── clean/           # Filtered entities (recommended for reuse)
-│   ├── flagged/         # Flagged entities (for audit)
-│   └── qc_report.json   # QC statistics and rule counts
-├── processed_data.csv   # Intermediate NER annotations
-├── run_manifest.json    # Pipeline configuration
-└── progress.txt         # Processing progress
+â”œâ”€â”€ inventories/
+â”‚   â”œâ”€â”€ pers.xlsx        # Person entities
+â”‚   â”œâ”€â”€ loc.xlsx         # Location entities
+â”‚   â”œâ”€â”€ org.xlsx         # Organization entities
+â”‚   â”œâ”€â”€ fac.xlsx         # Facility entities
+â”‚   â”œâ”€â”€ pro.xlsx         # Product entities
+â”‚   â””â”€â”€ event.xlsx       # Event entities
+â”œâ”€â”€ qc/
+â”‚   â”œâ”€â”€ clean/           # Filtered entities (recommended for reuse)
+â”‚   â”œâ”€â”€ flagged/         # Flagged entities (for audit)
+â”‚   â””â”€â”€ qc_report.json   # QC statistics and rule counts
+â”œâ”€â”€ processed_data.csv   # Intermediate NER annotations
+â”œâ”€â”€ run_manifest.json    # Pipeline configuration
+â””â”€â”€ progress.txt         # Processing progress
 ```
 
 ## Repository Structure
 
 ```
 persian-ner-pipeline/
-├── pipeline.py              # Main extraction pipeline
-├── qc.py                    # Quality Control module
-├── requirements.txt         # Production dependencies (pinned)
-├── requirements-dev.txt     # Development dependencies
-├── CITATION.cff             # Citation metadata
-├── LICENSE                  # MIT License
-├── README.md                # Documentation
-├── artifacts/
-│   ├── manifest.json        # Release metadata
-│   ├── checksums_sha256.txt # Integrity verification
-│   └── README.md            # Artifacts documentation
-├── data/
-│   └── README.md            # Input corpus contract
-├── docs/
-│   ├── REPRODUCIBILITY.md   # Reproduction protocol
-│   ├── DATASET.md           # Dataset documentation
-│   ├── QC.md                # QC protocol
-│   └── CHANGELOG.md         # Version history
-└── scripts/
-    └── make_checksums.py    # Checksum generation
+â”œâ”€â”€ pipeline.py              # Main extraction pipeline
+â”œâ”€â”€ qc.py                    # Quality Control module
+â”œâ”€â”€ requirements.txt         # Production dependencies (pinned)
+â”œâ”€â”€ requirements-dev.txt     # Development dependencies
+â”œâ”€â”€ CITATION.cff             # Citation metadata
+â”œâ”€â”€ LICENSE                  # MIT License
+â”œâ”€â”€ README.md                # Documentation
+â”œâ”€â”€ artifacts/
+â”‚   â”œâ”€â”€ manifest.json        # Release metadata
+â”‚   â”œâ”€â”€ checksums_sha256.txt # Integrity verification
+â”‚   â””â”€â”€ README.md            # Artifacts documentation
+â”œâ”€â”€ data/
+â”‚   â””â”€â”€ README.md            # Input corpus contract
+â”œâ”€â”€ docs/
+â”‚   â”œâ”€â”€ REPRODUCIBILITY.md   # Reproduction protocol
+â”‚   â”œâ”€â”€ DATASET.md           # Dataset documentation
+â”‚   â”œâ”€â”€ QC.md                # QC protocol
+â”‚   â””â”€â”€ CHANGELOG.md         # Version history
+â””â”€â”€ scripts/
+    â””â”€â”€ make_checksums.py    # Checksum generation
 ```
 
 ## Reproducibility
