@@ -4,19 +4,19 @@
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18365950.svg)](https://doi.org/10.5281/zenodo.18365950)
 
-A reproducible pipeline for constructing silver-standard named entity inventories from Persian Wikipedia, designed to support research in Persian natural language processing.
+A reproducible pipeline for constructing silver-standard named entity inventories from Persian Wikipedia.
 
 ## Overview
 
-PW-NER provides a deterministic, version-controlled extraction pipeline that processes Persian Wikipedia text to generate entity inventories for six entity classes: PER, LOC, ORG, FAC, PRO, and EVENT. The pipeline integrates Hazm normalization and Stanza NER with pinned dependencies to ensure reproducible extraction across environments.
+PW-NER is a deterministic, version-controlled Persian Named Entity Recognition extraction pipeline. It processes Persian Wikipedia text and produces entity inventories for PER, LOC, ORG, FAC, PRO, and EVENT classes using Hazm normalization and Stanza NER.
 
 ## Features
 
-- Deterministic preprocessing with ZWNJ normalization and compound segmentation
-- Pinned dependencies for reproducible execution
-- Six entity classes with validated extraction
-- Quality control with clean/flagged entity splits
-- SHA-256 integrity verification
+- Deterministic preprocessing with ZWNJ normalization
+- Pinned dependencies for reproducibility
+- Six entity classes
+- Quality control filtering
+- SHA-256 artifact verification
 - Versioned DOI release
 
 ## Entity Statistics
@@ -44,15 +44,18 @@ pip install -r requirements.txt
 
 Place the Farsi Wikipedia snapshot at:
 
-```
+```text
 data/raw_data.csv
 ```
 
 Required columns:
 
-- `title`: Wikipedia article title
-- `content`: Raw article text
-- `link`: Article URL (optional)
+- title
+- content
+- link (optional)
+
+Source:
+https://www.kaggle.com/datasets/amirpourmand/fa-wikipedia
 
 ## Usage
 
@@ -72,41 +75,25 @@ python pipeline.py \
 ### Quality Control
 
 ```bash
-python qc.py \
-  --input_dir PW-NER/inventories \
-  --output_dir PW-NER/qc \
-  --write_raw_copy
+python qc.py --input_dir PW-NER/inventories --output_dir PW-NER/qc --write_raw_copy
 ```
 
 ### Integrity Verification
 
 ```bash
-python scripts/make_checksums.py \
-  --root artifacts \
-  --out artifacts/checksums_sha256.txt \
-  --verify
+python scripts/make_checksums.py --root artifacts --out artifacts/checksums_sha256.txt --verify
 ```
 
-## Repository Structure
+## Reproducibility
 
-```
-persian-ner-pipeline/
-├── pipeline.py
-├── qc.py
-├── requirements.txt
-├── CITATION.cff
-├── LICENSE
-├── README.md
-├── artifacts/
-├── data/
-├── docs/
-└── scripts/
-    └── make_checksums.py
-```
+- Deterministic execution using `--no_timestamp`
+- Exact dependency versions
+- SHA-256 checksum verification
+- Zenodo DOI release
 
 ## Dependencies
 
-```
+```text
 stanza==1.8.2
 hazm==0.9.1
 beautifulsoup4==4.12.3
@@ -124,16 +111,19 @@ openpyxl==3.1.2
   year = {2026},
   publisher = {Zenodo},
   version = {v1.0.0-silver},
-  doi = {10.5281/zenodo.18365950}
+  doi = {10.5281/zenodo.18365950},
+  url = {https://github.com/amirradnia99/persian-ner-pipeline}
 }
 ```
 
 ## License
 
-MIT License. Source corpus is external and distributed under its original license.
+MIT License.
 
 ## Contact
 
-Repository: https://github.com/amirradnia99/persian-ner-pipeline
+Repository:
+https://github.com/amirradnia99/persian-ner-pipeline
 
-DOI: https://doi.org/10.5281/zenodo.18365950
+DOI:
+https://doi.org/10.5281/zenodo.18365950
