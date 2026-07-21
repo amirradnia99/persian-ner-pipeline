@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18365950.svg)](https://doi.org/10.5281/zenodo.18365950)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18365951.svg)](https://doi.org/10.5281/zenodo.18365951)
 
 A reproducible pipeline for constructing silver-standard named entity inventories from Persian Wikipedia, designed to support research in Persian natural language processing.
 
